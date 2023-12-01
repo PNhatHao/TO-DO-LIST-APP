@@ -1,20 +1,73 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
 
-export default function App() {
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HomeScreen} from './screens/HomeScreen'
+import { DetailsScreen} from './screens/DetailsScreen.js'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import Icon from 'react-native-vector-icons/Ionicons'
+
+const HomeStack = createNativeStackNavigator();
+const DetailsStack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const HomeStackScreen = ({navigation}) => (
+      <HomeStack.Navigator screenOptions={{
+        headerStyle:{
+          backgroundColor:'#009387',
+        },
+        headerTintColor:'#fff',
+        headerTitleStyle: {
+          fontWeight:'bold',
+        }
+      }}>
+        <HomeStack.Screen name="Home" component={HomeScreen} options={{
+          title:'Overview',
+          headerLeft: () => (
+            <Icon.Button name="ios-menu" size={25}
+            backgroundColor="#009387" onPress ={() => navigation.openDrawer()}
+            ></Icon.Button>
+          )
+        }} />
+      </HomeStack.Navigator>
+        
+);
+
+const DetailsStackScreen = ({navigation}) => (
+  <DetailsStack.Navigator screenOptions={{
+    headerStyle:{
+      backgroundColor:'#009387',
+    },
+    headerTintColor:'#fff',
+    headerTitleStyle: {
+      fontWeight:'bold',
+    }
+  }}>
+    <Stack.Screen name="Details" component={DetailsScreen} options={{
+          headerLeft: () => (
+            <Icon.Button name="ios-menu" size={25}
+            backgroundColor="#009387" onPress ={() => navigation.openDrawer()}
+            ></Icon.Button>
+          )
+     }} />
+  </DetailsStack.Navigator> 
+);
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeStackScreen} />
+        <Drawer.Screen name="Details" component={DetailsStackScreen} />
+      </Drawer.Navigator>
+
+     
+
+      
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

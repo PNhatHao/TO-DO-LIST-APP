@@ -10,10 +10,12 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import MainTabScreen from './screens/MainTabScreen.js';
+import MainTabScreen from './screens/MainTabScreen';
 import SupportScreen from './screens/SupportScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import BookmarkScreen from './screens/BookmarkScreen';
+
+import RootStackScreen from './screens/RootStackScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -23,13 +25,14 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <RootStackScreen/>
+      {/* <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
         <Drawer.Screen name="SupportScreen" component={SupportScreen} />
         <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
         <Drawer.Screen name="BookmarkScreen" component={BookmarkScreen} />
-        {/* <Drawer.Screen name="Details" component={DetailsStackScreen} /> */}
-      </Drawer.Navigator>
+        
+      </Drawer.Navigator> */}
 
      
 
